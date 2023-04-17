@@ -6,6 +6,7 @@ on:
 
 jobs:
   worker1:
+    name: updating worker 1
     runs-on: worker1 
     steps:
     - uses: actions/checkout@v3
@@ -15,11 +16,12 @@ jobs:
         docker rmi -f my-node-app
         docker stack rm my-stack
         docker build -t my-node-app .
+        sleep 10
         docker stack deploy -c docker-compose.yml my-stack
         docker ps
 
   worker2:
-    name: updating workers
+    name: updating worker 2
     needs: worker1
     runs-on: worker2
 
@@ -31,10 +33,11 @@ jobs:
         docker rmi -f my-node-app
         docker stack rm my-stack
         docker build -t my-node-app .
+        sleep 10
         docker stack deploy -c docker-compose.yml my-stack
 
   worker3:
-    name: updating workers
+    name: updating worker 3
     needs: worker2
     runs-on: worker3
 
@@ -46,5 +49,6 @@ jobs:
         docker rmi -f my-node-app
         docker stack rm my-stack
         docker build -t my-node-app .
+        sleep 10
         docker stack deploy -c docker-compose.yml my-stack
         
