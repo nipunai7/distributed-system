@@ -8,5 +8,5 @@ app.get('/', async (req, res) => {
 });
 
 app.listen(port, () => {
-    console.log(`Node.js app listening at http://localhost:${port}`);
+    console.log(`Node.js app listening at http://192.168.90.26:${port}`);
 });
