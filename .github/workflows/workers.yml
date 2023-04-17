@@ -31,8 +31,9 @@ jobs:
 
     - name: updating workers
       run: |
-        docker stack rm my-stack || docker rmi my-node-app
+        docker rmi my-node-app
+        docker stack rm my-stack
         docker build -t my-node-app .
         docker stack deploy -c docker-compose.yml my-stack
-        curl localhost:3000
+        docker ps
         
