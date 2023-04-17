@@ -1,0 +1,9 @@
+version: '3'
+
+services:
+  my-app:
+    image: my-node-app
+    deploy:
+      replicas: 3
+    ports:
+      - 3000:3000
