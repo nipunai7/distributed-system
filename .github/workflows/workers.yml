@@ -22,7 +22,7 @@ jobs:
         curl localhost:3000
 
   notify:
-    name: updating worker2
+    name: updating workers
     needs: build
     runs-on: worker2 worker3
 
@@ -31,8 +31,7 @@ jobs:
 
     - name: updating workers
       run: |
-        docker stack rm my-stack
-        docker rmi my-node-app
+        docker stack rm my-stack || docker rmi my-node-app
         docker build -t my-node-app .
         docker stack deploy -c docker-compose.yml my-stack
         curl localhost:3000
