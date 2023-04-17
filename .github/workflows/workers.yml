@@ -1,0 +1,23 @@
+name: Updating workers
+
+on:  
+  push:
+    branches: main
+
+jobs:
+
+  build:
+
+    runs-on: worker1 
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: updating replicas
+      run: |
+        docker stack rm my-stack
+        docker rmi my-node-app
+        docker build -t my-node-app .
+        docker stack deploy -c docker-compose.yml my-stack
+        curl localhost:3000
+        
