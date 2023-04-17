@@ -5,11 +5,8 @@ on:
     branches: main
 
 jobs:
-
-  build:
-
+  worker1:
     runs-on: worker1 
-
     steps:
     - uses: actions/checkout@v3
 
@@ -21,10 +18,25 @@ jobs:
         docker stack deploy -c docker-compose.yml my-stack
         docker ps
 
-  notify:
+  worker2:
     name: updating workers
-    needs: build
-    runs-on: worker2 worker3
+    needs: worker1
+    runs-on: worker2
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: updating workers
+      run: |
+        docker rmi -f my-node-app
+        docker stack rm my-stack
+        docker build -t my-node-app .
+        docker stack deploy -c docker-compose.yml my-stack
+
+  worker3:
+    name: updating workers
+    needs: worker2
+    runs-on: worker3
 
     steps:
     - uses: actions/checkout@v3
