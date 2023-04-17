@@ -15,11 +15,11 @@ jobs:
 
     - name: updating worker1
       run: |
+        docker rmi -f my-node-app
         docker stack rm my-stack
-        docker rmi my-node-app
         docker build -t my-node-app .
         docker stack deploy -c docker-compose.yml my-stack
-        curl localhost:3000
+        docker ps
 
   notify:
     name: updating workers
@@ -31,9 +31,8 @@ jobs:
 
     - name: updating workers
       run: |
-        docker rmi my-node-app
+        docker rmi -f my-node-app
         docker stack rm my-stack
         docker build -t my-node-app .
         docker stack deploy -c docker-compose.yml my-stack
-        docker ps
         
