@@ -13,7 +13,23 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    - name: updating replicas
+    - name: updating worker1
+      run: |
+        docker stack rm my-stack
+        docker rmi my-node-app
+        docker build -t my-node-app .
+        docker stack deploy -c docker-compose.yml my-stack
+        curl localhost:3000
+
+  notify:
+    name: updating worker2
+    needs: build
+    runs-on: worker2 worker3
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: updating workers
       run: |
         docker stack rm my-stack
         docker rmi my-node-app
