@@ -15,6 +15,7 @@ jobs:
       run: |
         docker rmi -f my-node-app
         docker build -t my-node-app .
+        docker service update --image my-node-app:latest my-stack_my-app
         docker ps
 
   worker2:
@@ -29,6 +30,7 @@ jobs:
       run: |
         docker rmi -f my-node-app
         docker build -t my-node-app .
+        docker service update --image my-node-app:latest my-stack_my-app
 
   worker3:
     name: updating worker 3
@@ -42,3 +44,4 @@ jobs:
       run: |
         docker rmi -f my-node-app
         docker build -t my-node-app .
+        docker service update --image my-node-app:latest my-stack_my-app
