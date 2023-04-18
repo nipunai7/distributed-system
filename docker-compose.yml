@@ -2,7 +2,7 @@ version: '3'
 
 services:
   my-app:
-    image: my-node-app
+    image: worker1:5000/my-node-app:latest
     deploy:
       replicas: 3
     ports:
