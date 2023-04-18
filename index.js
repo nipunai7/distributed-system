@@ -4,7 +4,7 @@ const port = 3000;
 const getId = require('docker-container-id');
 
 app.get('/', async (req, res) => {
-    res.send(`Hello! My Docker container ID is ${await getId()}.`);
+    res.send(`Hi! My Docker container ID is ${await getId()}.`);
 });
 
 app.listen(port, () => {
