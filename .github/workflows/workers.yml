@@ -14,10 +14,7 @@ jobs:
     - name: updating worker1
       run: |
         docker rmi -f my-node-app
-        docker stack rm my-stack
         docker build -t my-node-app .
-        sleep 10
-        docker stack deploy -c docker-compose.yml my-stack
         docker ps
 
   worker2:
@@ -31,10 +28,7 @@ jobs:
     - name: updating workers
       run: |
         docker rmi -f my-node-app
-        docker stack rm my-stack
         docker build -t my-node-app .
-        sleep 10
-        docker stack deploy -c docker-compose.yml my-stack
 
   worker3:
     name: updating worker 3
@@ -47,8 +41,4 @@ jobs:
     - name: updating workers
       run: |
         docker rmi -f my-node-app
-        docker stack rm my-stack
         docker build -t my-node-app .
-        sleep 10
-        docker stack deploy -c docker-compose.yml my-stack
-        
